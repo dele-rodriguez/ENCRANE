@@ -1,0 +1,23 @@
+.individual{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+  article{
+    font-size: 22px;
+  }
+  .individual figure,.individual img{
+    width: 100%;
+  }
+  .individual .details h1{
+    font-size: 35px;
+    text-transform:uppercase;
+    color: crimson;
+  }
+  .individual .details h2{
+    font-size: 25px;
+    color: crimson;
+    margin-bottom: 15px;
+  }

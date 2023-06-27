@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane | {{ request.user.username }}</title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="/media/{{ request.user.userprofile.profile_pic }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/skins/ui/oxide/skin.min.css">
+     <script src="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> 
+     <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon"> 
+</head>
+<body>
+      <!-- Header -->
+
+      {% include 'extensions/header.html' %}
+      
+  <!-- End Header -->
+  <section class="home-container">
+    <section id="make-post-posts">
+      {% if request.user.is_authenticated %}
+      <section id="make-post">
+        <figure><img src="/media/{{ request.user.userprofile.profile_pic }}" alt=""></figure>
+        <form method="post">
+          {% csrf_token %}
+          <textarea name="text" placeholder="Ask a Question" rows="20"></textarea>
+          <button id="submit">Post</button>
+        </form>
+      </section>
+      {% else %}
+      <div id="make-post">
+        <h1 style="color:crimson"> <a href="/login">Sign In</a> to Ask Question(s)!</h1>
+      </div>
+      {%endif%}
+    <section id="posts">
+      <section id="posts-header">
+        <div class="recent-questions post-head">Recent Questions</div>
+      </section>
+<!-- recent questions -->
+      <section class="questions-container recent" >
+        {% for recent_post in recent_posts %}
+        <section class="unit-question">
+          <div class="poster-profile">
+            <figure>
+              <img src="/media/{{ recent_post.user_profile.profile_pic }}" alt="{{ recent_post.username}}">
+            </figure>
+            <div class="poster-info-">
+              <h2>{{ recent_post.username }}</h2>
+              <time>{{ recent_post.date }}</time>
+            </div>
+          </div>
+          <div class="question">
+            {{ recent_post.post | safe | linebreaks }}
+          </div>
+          <div class="number-of-comments">
+            {{ recent_post.Questions.count }} comment(s)
+          </div>
+          <div class="view-comments">
+            <a href="/question/{{ recent_post.id }}">View Comments</a>
+          </div>
+        </section>
+        {% endfor %}
+      </section>
+    </section>
+    </section>
+  </section>
+
+  <!-- Footer -->
+
+  {% include 'extensions/footer.html' %}
+
+  <script src="{% static 'tinymce.js' %}"></script>
+  <script src="{% static 'reload-page.js' %}"></script>
+  <script>
+    document.querySelector("#home-link").className = "current"
+  </script>
+</body>
+</html

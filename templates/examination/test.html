@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane | {{ request.user.username }}</title>
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'test.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+</head>
+<body>
+      <!-- Header -->
+
+      {% include 'extensions/header.html' %}
+
+  <!-- End Header -->
+    <main>
+        <div class="main-container">
+            <h1>Note to self:</h1>
+            <ul>
+                <li>Please check your options again before you start Exam</li>
+                <li>You can only take Objective Questions in Exam Mode</li>
+                <li>Please send a Message if there is/are errors in the Results Page</li>
+                <li>Try to finish the Exam in the shortest time possible.</li>
+                <li>All the best!</li>
+            </ul>
+            
+            
+        </div>
+        <aside>
+            <div class="aside">
+              {% if user.is_authenticated %}
+                <h1>Please fill in the Form</h1>
+                <form action="exam" method="POST" name="test_form">
+                  {%csrf_token%}
+                    <div class="form-container">
+                        <div class="labels">
+                          <!-- mode -->
+                          <div>
+                            <label for="mode">Mode: </label>
+                            <select name="mode" id="mode">
+                              <option value="">----------------</option>
+                              <option value="Exam Mode">Exam Mode</option>
+                              <option value="Study Mode">Study Mode</option>
+                            </select>
+                          </div>
+                          <!-- course -->
+                          <div>
+                            <label for="course">Course: </label>
+                            <select name="course" id="course">
+                              <option value="">----------------</option>
+                              {%for course in tup%}
+                              <option value="{{course}}">{{course}}</option>
+                              {%endfor%}
+                          </select>
+                          </div>
+                          <!-- type -->
+                          <div>
+                            <label for="type">Type: </label>
+                            <select name="type" id="type" disabled>
+                              <option value="">----------------</option>
+                            </select>
+                          </div>
+                          <!-- Time -->
+                          <div>
+                            <label for="time">Time: </label>
+                            <select name="time" id="time">
+                              <option value="">----------------</option>
+                              <option value="10">10 minutes</option>
+                              <option value="15">15 minutes</option>
+                              <option value="20">20 minutes</option>
+                              <option value="25">25 minutes</option>
+                              <option value="30">30 minutes</option>
+                              <option value="35">35 minutes</option>
+                              <option value="40">40 minutes</option>
+                              <option value="45">45 minutes</option>
+                              <option value="50">50 minutes</option>
+                            </select>
+                          </div>
+                          <!-- Number of Questions -->
+                          <div>
+                            <label for="qstn-number" style="font-size: 17px;">Number of Questions: </label>
+                            <select name="qstn_number" id="qstn-number">
+                              <option value="">----------------</option>
+                              <option value="10">10 Questions</option>
+                              <option value="15">15 Questions</option>
+                              <option value="20">20 Questions</option>
+                              <option value="25">25 Questions</option>
+                              <option value="30">30 Questions</option>
+                              <option value="35">35 Questions</option>
+                              <option value="40">40 Questions</option>
+                              <option value="45">45 Questions</option>
+                              <option value="50">50 Questions</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="configure-exam-state">Please complete form!</div>
+                    <button>Start Exam</button>
+                </form>
+                
+            </div>
+            {% else %}
+            <h1>You're not Logged in!</h1>
+            <h2 style="font-size:x-large">Click <a href="/login">here</a> to  Login</h2><br>
+            <h2 style="font-size:x-large">Click <a href="/register">here</a> to  Create a free Account</h2>
+            {% endif %}
+        </aside>
+    </main>
+
+    {% include 'extensions/footer.html' %}
+  <script>
+      const current_link = document.querySelector("#test-link")
+      current_link.className = "current"
+  </script>
+  <script src="{% static 'test-state.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane | {{ request.user.username }}</title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'study-mode-objective-explanation.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+    <style>
+      .result{
+        font-size: larger;
+        margin-bottom: 12px;
+      }
+
+    </style>
+</head>
+<body>
+  
+  {% include 'extensions/header.html' %}
+    
+    <div class="study-mode-container">
+      {% if request.method == 'POST' %}
+      <div class="result">
+        <h1>Result:</h1>
+        <h1>Course: {{ course }}</h1>
+        <h1><span class="q-nu"></span>Score: {{ score }}/{{ total }}</h1>
+        <h1>Time: {{ time }} </h1>
+      </div>
+    {% for q in questions %}
+        <div class="unit-question">
+            <div class="question-box">
+                <h1><span class="q-num"></span> &nbsp; {{q.question | safe}}</h1>
+            </div>
+            <div class="options-box">
+                <ul>
+                    <li> A. {{q.op1 | safe}}</li>
+                    <li> B. {{q.op2 | safe}}</li>
+                    <li> C. {{q.op3 | safe}}</li>
+                    <li> D. {{q.op4 | safe}}</li>
+                </ul>
+            </div>
+            <div class="buttons">
+                <button>Show Answer</button>
+            </div>
+            <div class="answer">
+              <div class="answer-box">
+                <span>The Correct option is &nbsp;</span> <span style="text-transform: uppercase; color:crimson; font-weight: bold;">{{ q.correct_option | safe }}</span>
+              </div>
+                <a href="objective/explanation/{{ q.id }}">Show Explanation</a>
+            </div>
+        </div>
+    {% endfor %}    
+    </div>
+    {% else %}
+    <h1 style="color:crimson">You haven't taken any Exam; visit <a href="/test">here</a> to take Exam</h1>
+    {% endif %}
+    </div>
+
+    {% include 'extensions/footer.html' %}
+      <style>
+        .answer{
+          flex-direction: column;
+        }
+        .answer-box{
+          display: flex;
+          flex-direction: row;
+        }
+      </style>
+    
+    <script src="{% static 'toggle.js' %}"></script>
+    <script>
+      const current_link = document.querySelector("#test-link")
+      current_link.className = "current"
+    </script>
+</body>
+</html>

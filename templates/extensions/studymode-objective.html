@@ -1,0 +1,26 @@
+<div class="study-mode-container">
+    {% for question in questions %}
+      <div class="unit-question">
+          <div class="question-box">
+              <h1><span class="q-num"></span> &nbsp; {{ question.question | safe }}</h1>
+          </div>
+          <div class="options-box">
+              <ul>
+                  <li> A. {{ question.op1 | safe }}</li>
+                  <li> B. {{ question.op2 | safe }}</li>
+                  <li> C. {{ question.op3 | safe }}</li>
+                  <li> D. {{ question.op4 | safe }}</li>
+              </ul>
+          </div>
+          <div class="buttons">
+              <button>Show Answer</button>
+          </div>
+          <div class="answer">
+            <div class="answer-box">
+              <span>The Correct option is &nbsp;</span> <span style="text-transform: uppercase; color:crimson; font-weight: bold;">{{ question.correct_option }}</span>
+            </div>
+              <a href="objective/explanation/{{question.id}}">Show Explanation</a>
+          </div>
+      </div>
+      {% endfor %}
+  </div>

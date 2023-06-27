@@ -1,0 +1,50 @@
+<div class="exam-container">
+    <div class="exam-section">
+        <header>
+            <div class="title">
+                {{ course }} <br> {{ mode }}
+            </div>
+            <div class="settings">
+                <div class="time">
+                    <span class="txt">Time Left: </span>
+                    <span class="time-left">00 : 00</span>
+                </div>
+            </div>
+        </header>
+        <main>
+            <form method="post" action="result">
+                {% csrf_token %}
+                {% for question in questions %}
+                <div class="unit-question">
+                    <div class="question-box">
+                        <h2><span class="q-num"></span> {{ question.question | safe }}</h2>
+                    </div>
+                    <div class="options-box">
+                        <input type="radio" name="{{ question.question }}" id="op1{{question.id}}" value="a"><div class="op1 options"><label  for="op1{{ question.id }}">{{ question.op1 | safe}}</label></div>
+                        <input type="radio" name="{{ question.question }}" id="op2{{question.id}}" value="b"><div class="op2 options"><label  for="op2{{ question.id }}">{{ question.op2 | safe}}</label></div>
+                        <input type="radio" name="{{ question.question }}" id="op3{{question.id}}" value="c"><div class="op3 options"><label  for="op3{{ question.id }}">{{ question.op3 | safe}}</label></div>
+                        <input type="radio" name="{{ question.question }}" id="op4{{question.id}}" value="d"><div class="op4 options"><label  for="op4{{ question.id }}">{{ question.op4 | safe }}</label></div>
+                    </div>
+                </div>
+                {% endfor %}
+                <input type="hidden" name="qstn_number" value = "{{ qstn_number }}">
+                <button id="submit">Submit</button>
+                <button id="hide_submit" style="display:none"></button>
+            </form>
+            <div class="monitor-progress">
+                <p>You've answered <span id="count-answered">0</span> of <span id="total-questions"></span> Questions</p>
+            </div>
+        </main>
+        <footer id="qstn-footer">
+            <div class="buttons">
+                <button id="prev">&lt; Prev</button>
+                <button id="next">Next &gt;</button>
+            </div>
+        </footer>
+    </div>
+    <aside>
+        <h2>Question Numbers</h2>
+        <div class="pagination">
+        </div>
+</aside>
+</div>

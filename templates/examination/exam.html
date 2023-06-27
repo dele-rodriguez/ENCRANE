@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane | {{ request.user.username }}</title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+    {% if mode == "Exam Mode" %}
+    <link rel="stylesheet" href="{% static 'exam-objective.css' %}">
+    {% elif mode == "Study Mode" %}
+    <link rel="stylesheet" href="{% static 'exam-theory.css' %}">
+    {% endif%}
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+</head>
+<body>
+
+  
+{% include 'extensions/header.html' %}
+
+{% if mode == "Exam Mode" and type == "Objective" %}
+
+  {% include 'extensions/exammode.html' %}
+
+{% elif mode == "Study Mode" and type == "Objective" %}
+
+  {% include 'extensions/studymode-objective.html' %}
+
+{% elif mode == "Study Mode" and type == "Theory" %}
+
+  {% include 'extensions/studymode-theory.html' %}
+
+{% endif %}
+    {% include 'extensions/footer.html' %}
+   
+    {% if mode == "Exam Mode" %}
+    <script src="{% static 'exam.js' %}"></script>
+    {%endif%}
+    <script src="{% static 'toggle.js' %}"></script>
+    <script>
+      var countdownTime = "{{time}}" * 60;  
+      const current_link = document.querySelector("#test-link")
+      current_link.className = "current"
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chat - Mechanical Engineering</title>
+        <style>
+            body{
+                padding: 0;
+                margin: 0;
+            }
+            .container{
+                display: flex;
+                background-color: #ddd;
+                padding: 5px 5px 5px 5px;
+                margin: 0px;
+                color: white;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+                'Lucida Grande', 'Lucida Sans Unicode',
+                 Geneva, Verdana, sans-serif      ;
+            }
+            .sender-info{
+                border-bottom: 1px solid white;
+            }
+            .chat-container{
+                position: relative;
+                display: flex;
+                flex-direction: column;
+            }
+            .chats{
+                flex: 1;
+            }
+            .textbox{
+                position: absolute;
+                bottom: 0;
+                width: 80%;
+            }
+            .textbox textarea{
+                width: 100%;
+                resize: none;
+                
+            }
+            .chat-container, .settings-container{
+                width: 50%;
+                background-color: crimson;
+                margin: 2px;
+                height: 97vh;
+            }
+            .chat-container figure{
+                display: flex;
+                width: 100%;
+                align-items: center;
+                margin-bottom: -6px;
+                margin-top: -6px;
+            }
+             .chat-container figure img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 12px;
+            }
+            .chats{
+                height: max-content;
+            }
+            textarea{
+                position: sticky;
+                bottom: 0;
+                /* margin-bottom: 20px;
+                width: ; */
+            }
+
+
+            /* settings */
+            .settings-container .settings{
+                display:flex;
+                height: 95vh;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                line-height: 10px;
+            }
+            .settings-container .settings figure,
+            .settings-container .settings figure img{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+            summary{
+                cursor: pointer;
+            }
+            .quick-links ul{
+                line-height: 25px;
+                list-style: none;
+            }
+            .quick-links ul li a{
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="chat-container">
+                <div class="sender-info">
+                    <figure>
+                        <img src="{% static 'img.jpg' %}" alt="">
+                        <h2>Mechanical Engineering</h2>
+                    </figure>
+                </div>
+                <div class="chats">
+                    <div class="unit-chat">
+
+                    </div>
+                </div>
+                <div class="textbox">
+                    <textarea name="" id="" cols="30" rows="2"></textarea>
+                </div>
+            </div>
+            <div class="settings-container">
+                <div class="settings">
+                    <figure>
+                        <img src="{% static 'img.jpg' %}" alt="profile pic">
+                    </figure>
+                    <h1>Yusuf Saubana Mayowa</h1>
+                    <h2>Faculty of Engineering</h2>
+                    <h3>Mechanical Engineering</h3>
+                    <div class="quick-links">
+                        <details>
+                            <summary>Quick links </summary>
+                            <ul>
+                                <li><a href="/">Go Home</a></li>
+                                <li><a href="/contact">Contact Developers/Admin</a></li>
+                                <li><a href="/test">Take Exam</a></li>
+                                <li><a href="/">Ask Question</a></li>
+                                <li><a href="">Private Chat Developers</a></li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

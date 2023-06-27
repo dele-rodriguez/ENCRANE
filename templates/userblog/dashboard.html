@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane - {{request.user.username}}'s Dashboard </title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="shortcut icon" href="/media/{{ request.user.userprofile.profile_pic }}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+
+</head>
+<body>
+ <!-- Header -->
+
+      {% include 'extensions/header.html' %}
+      
+  <!-- End Header -->
+
+      <div class="d-container">
+        <h1>Summary of your Activities on <span style="color:#000;">nCrane</span>:</h1>
+        <div class="user-activities">
+            <div class="unit-activity">
+                <h1>
+                    Number of Exams Taken
+                </h1>
+                <span>{{ total_exams_taken }}</span>
+            </div>
+            <div class="unit-activity">
+                <h1>
+                    Average Percentage Mark
+                </h1>
+                <span>{{ average_mark }} %</span>
+            </div>
+            <div class="unit-activity">
+                <h1>
+                    Average time spent on Exams
+                </h1>
+                <span>{{ average_time_spent }}</span>
+            </div>
+            <div class="unit-activity">
+                <h1>
+                    Number of Posts
+                </h1>
+                <span>{{ posts }} Posts</span>
+            </div>
+            <div class="unit-activity">
+                <h1>
+                    Number of Comments
+                </h1>
+                <span>{{ comments }} Comments</span>
+            </div>
+        </div>
+        <h1>Your Personal Infomation:</h1>
+        <div class="user-info">
+            <h2>Name: <span>{{ user.username }}<span></h2>
+            <h2>Email: <span>{{ user.email }}</span></h2>
+            <h2>Level: <span>{{ user_profile.level }} Level</span></h2>
+            <h2>Faculty: <span>Faculty of {{ user_profile.faculty }}</span></h2>
+            <h2>Department: <span>Mechanical Engineering</span></h2>
+        </div>
+        <hr> 
+        
+      </div>
+    <div class="home-container">
+      <section id="posts" style="width:100%">
+        <section id="posts-header">
+          <div class="recent-questions post-head">Your Posts</div>
+        </section>
+   <!-- recent questions -->
+        <section class="questions-container recent" >
+          {% for my_posts in my_posts %}
+          <section class="unit-question">
+            <div class="poster-profile">
+              <figure>
+                <img src="/media/{{ my_posts.user_profile.profile_pic }}" alt="{{ my_posts.username}}">
+              </figure>
+              <div class="poster-info-">
+                <h2>{{ my_posts.username }}</h2>
+                <time>{{ my_posts.date }}</time>
+              </div>
+            </div>
+            <div class="question">
+              {{ my_posts.post | safe | linebreaks }}
+            </div>
+            <div class="number-of-comments">
+              {{ my_posts.Questions.count }} comment(s)
+            </div>
+            <div class="view-comments">
+              <a href="/question/{{ my_posts.id }}">View Comments</a>
+            </div> 
+          </section>
+          
+          {% endfor %}
+        </section>
+      </section>
+    </div>
+
+    {% include 'extensions/footer.html' %}
+    <!-- <script src = "{% static 'tinymce.js' %}"></script> -->
+    <script>
+      const current_link = document.querySelector("#dashboard-link")
+      current_link.className = "current"
+    </script>
+  </body>
+  </html>

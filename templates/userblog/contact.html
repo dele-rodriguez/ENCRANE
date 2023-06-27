@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane - {{request.user.username}}'s Dashboard </title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="stylesheet" href="{% static 'contact.css' %}">
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+    <style>
+    </style>
+</head>
+<body>
+
+  {% include 'extensions/header.html' %}
+
+    <div class="contact-container">
+      <form id="postform">
+        {% csrf_token %}
+        <label for="text">
+          Send Us a Review/Suggestion:
+          </label>
+          <textarea name="text" id="text" cols="30" rows="10" maxlength="1000" required></textarea>
+        
+        <button type="submit">Send</button>
+        <h3 id="state"></h3>
+      </form>
+    </div>
+
+  {% include 'extensions/footer.html' %}
+  <script>
+    const current_link = document.querySelector("#contact-link")
+    current_link.className = "current"
+  </script>
+
+  <!-- <script type="text/javascript">
+    $(document).on("submit", "#postform", function(e){
+      e.preventDefault()
+      $.ajax({
+        type: "POST",
+        url: "/process_contact",
+        data: {
+          text: $('#text').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(data){
+          $("#state").html(data)
+        }
+      })
+    })
+  </script> -->
+</body>
+</html>

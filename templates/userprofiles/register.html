@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane | Sign Up</title>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+</head>
+<body>
+    <h1>Sign Up</h1>
+        <div class="container">
+                <img src="{% static 'register-img.png' %}">
+            <form method="post" enctype="multipart/form-data">
+                {% for message in messages %}
+                <h3>{{ message }}</h3>
+                {% endfor %}
+                {% csrf_token %}
+                <label>Username: {{ form.username }} </label>
+                <label>Email: {{ form.email }} </label>
+                <label>Faculty: {{ p_form.faculty }} </label>
+                <label>Department: {{ p_form.dept }} </label>
+                <label>Level: {{ p_form.level }} </label>
+                <label>Profile Picture: {{ p_form.profile_pic }} </label>
+                <label>Create Password: {{ form.password1 }} </label>
+                <label>Confirm Password: {{ form.password2 }} </label>
+                <button>Register</button>
+                <p>Have an account?<br><a href="/login">Sign In</a>.</p>
+            </form>
+        </div>
+</body>
+</html>

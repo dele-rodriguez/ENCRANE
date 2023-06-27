@@ -1,0 +1,70 @@
+main{
+    dIsplay: flex;
+    justify-content: space-around; 
+    margin-top: 100px;
+}
+main h1, main h2{
+    color: crimson;
+    font-size:30px ;
+    margin-bottom: 15px;
+}
+main h2{
+    font-size: 25px;
+}
+.main-container ul li{
+    list-style: none;
+    font-size: 18px;
+}
+.question-unit{
+    display: block;
+}
+ul li input{
+    margin-right: 25px;
+}
+.form-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: crimson;
+}
+.form-container p{
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.inputs{
+    margin-left: 35px;
+    color: black;
+}
+.next-prev{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.next-prev button, .pages button{
+    color: white;
+    background-color: crimson;
+    width: 95px;
+    border: 2px solid crimson;
+    padding: 10px;
+    font-weight: bold;
+    font-size: large;
+}
+@media(max-width:870px){
+    main{
+        flex-direction: column-reverse;
+        margin-top: 100px;
+        margin-left: 50px;
+    }
+    .form-container{
+        flex-direction: row;
+        justify-content:space-between;
+        width: 70%;
+    }
+    
+    .inputs{
+        margin-left: 50px;
+    }
+    .main-container ul{
+        margin-bottom: 22px;
+    }
+} 

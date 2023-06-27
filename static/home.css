@@ -1,0 +1,147 @@
+.home-container{
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: row;
+  }
+  .home-container #make-post-posts{
+    width:100%
+  }
+  .home-container #make-post-posts #make-post{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+    border-bottom: 1px solid crimson;
+  }
+  .home-container #make-post-posts #make-post form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 5px;
+  }
+  .home-container #make-post-posts #make-post form textarea{
+    width: 100%;
+    resize: none;
+    margin-bottom: 10px;
+    font-family: inherit;
+    padding:12px;
+    outline: none;
+  }
+  .home-container #make-post-posts #make-post form button#submit{
+    height: 30px;
+    font-family: inherit;
+    background-color: crimson;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  .home-container figure, .home-container img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  #posts #posts-header{
+    display: flex;
+    margin-bottom: 5px;
+  }
+  .post-head{
+    font-size: 25px;
+    font-weight: bold;
+    color: crimson;
+  }
+  .questions-container .unit-question{
+    border-bottom: 1px solid crimson;
+    margin-bottom: 10px;
+  }
+  .questions-container .question{
+    font-size: 20px;
+  }
+  .questions-container .number-of-comments, .view-comments{
+    font-size: 15px;
+  }
+
+  .home-container  #dashboard{
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+  }
+  .dashboard-title h1, h1{
+    font-size: 2em;
+  }
+  .home-container  #dashboard .dashboard-title{
+    text-align: center;
+  }
+  .home-container #dashboard .dash-info{
+    width: 80%;
+    background-color: #eee;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.5);
+    margin-bottom: 12px;
+  }
+  .dash-info span{
+    font-size: small;
+  }
+  .home-container #dashboard #dashboard-info{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .poster-profile{
+    display: flex;
+    align-items: center;
+  }
+  .poster-info-{
+    margin-left: 15px;
+  }
+  .poster-profile .poster-info- h2{
+    font-size: 22px;
+    text-transform: capitalize;
+  }
+
+  /* Question Html */
+  .comment-section-container img{
+    max-width:400px;
+    display: block;
+  }
+  .poster-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-transform:capitalize ;
+  }
+  .poster-info img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  .poster-info time, .poster-info- time{
+    font-size: 15px;
+  }
+  .sender-info h1{
+    text-transform: capitalize;
+  }
+
+  #posts{
+    width: 100%;
+  }
+  .question img{
+    width: 700px;
+    height: max-content;
+    border-radius: 0px;
+    display: block;
+  }
+
+  @media(max-width: 700px){
+    .question img{
+      width: 80%;
+    }
+  }

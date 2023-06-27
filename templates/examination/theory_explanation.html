@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane | {{ request.user.username }}</title>
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'th_exp.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/skins/ui/oxide/skin.min.css">
+    <script src="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <style>
+    img{
+      max-width:400px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+
+    {% include 'extensions/header.html' %}
+
+  <!-- End Header -->
+
+<div class="study-mode-container">
+      <div class="unit-question">
+          <div class="question-box">
+              <h1> {{ theory.question | safe }}</h1>
+          </div>
+          <div class="answer">
+            <span>Answer: &nbsp; </span> <span style="color:crimson; font-weight: bold;">{{ theory.ans | safe }}</span>
+          </div>
+          <div class="explanation">
+            <h1>Explanation:</h1>
+            <article class="explanation-box">
+                {{ theory.explanation | safe }}
+            </article>
+          </div>
+      </div>
+      {% if user.is_authenticated %}
+        <div class="comment-section">
+          <form method="post">
+            {% csrf_token %}
+            <label>Write a Comment</label>
+            <textarea  name="comment" placeholder="Contribute..."></textarea>
+
+            <button>Submit</button>
+          </form>
+        </div>
+      {% else %}
+      <h2>Log in to make contributions <a href="/signin">here</a>.</h2>
+      {% endif %}
+      <div class="comment-section-container">
+      {% for comment in theory_comments %}
+        <div class="comment-section-comments">
+          <div class="sender-info">
+            <figure>
+              <img src="/media/{{ comment.user_profile.profile_pic }}" alt="{{ comment.username }}">
+            </figure>
+            <div class="name-date">
+              <h1>{{ comment.username }}</h1>
+              <time>{{ comment.date }}</time>
+            </div>
+          </div>
+          <article>
+            {{ comment.content | safe }}
+          </article>
+        </div>
+        {% endfor %}
+      </div>
+  </div>
+
+
+  {% include 'extensions/footer.html' %}
+  <script src = "{% static 'tinymce.js' %}"></script>
+  <script>
+    const current_link = document.querySelector("#test-link")
+    current_link.className = "current"
+  </script>
+</body>
+</html>

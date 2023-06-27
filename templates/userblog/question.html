@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nCrane | {{ request.user.username }}</title>
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'th_exp.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="/media/{{ question.user_profile.profile_pic }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/skins/ui/oxide/skin.min.css">
+    <script src="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body>
+  
+      <!-- Header -->
+
+      {% include 'extensions/header.html' %}
+      
+  <!-- End Header -->
+
+<div class="study-mode-container">
+    <div class="poster-info">
+            <figure>
+              <img src="/media/{{ question.user_profile.profile_pic }}" alt="{{ comment.username }}">
+            </figure>
+            <div class="name-date">
+              <h1>{{ question.username }}</h1>
+              <time>{{question.date }}</time>
+            </div>
+    </div>
+      <div class="unit-question">
+          <div class="question-box">
+              <h1>{{ question.post | safe }}</h1>
+          </div>
+      </div>
+      {% if user.is_authenticated %}
+        <div class="comment-section">
+          <form id="postform">
+            {% csrf_token %}
+            <label>Write a Comment</label>
+            <textarea  name="text" placeholder="Contribute..."></textarea>
+            <button>Submit</button>
+          </form>
+        </div>
+      {% else %}
+      <h2>Log in to make contributions <a href="/signin">here</a>.</h2>
+      {% endif %}
+      <div class="comment-section-container">
+        {% for comment in comments %}
+        <div class="comment-section-comments">
+          <div class="sender-info">
+            <figure>
+              <img src="/media/{{ comment.user_profile.profile_pic }}" alt="{{ comment.username }}">
+            </figure>
+            <div class="name-date">
+              <h1>{{ comment.username }}</h1>
+              <time>{{comment.date }}</time>
+            </div>
+          </div>
+          <article>
+            {{ comment.content | safe }}
+          </article>
+        </div>
+        {% endfor %}
+      </div>
+  </div>
+
+
+  {% include 'extensions/footer.html' %}
+  <script src = "{% static 'tinymce.js' %}"></script>
+  <script src="{% static 'reload-page.js' %}"></script>
+    <script>
+    const current_link = document.querySelector("#test-link")
+    current_link.className = "current"
+  </script>
+
+</body>
+</html>
