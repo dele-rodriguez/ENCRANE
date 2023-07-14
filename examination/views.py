@@ -9,20 +9,24 @@ import time
 # Create your views here.
 
 def test(request):
-    course = f.Courses.objects.all()
-    user_profile = get_object_or_404(UserProfile, user = request.user)
-    department_courses = f.Department_Courses.objects.get(department = user_profile.dept)
-    
-    related_courses = department_courses.courses.all()
-    print(related_courses)
-    for i in related_courses:
-        print(i.course)
+    if request.user.is_authenticated:
+        course = f.Courses.objects.all()
+        user_profile = get_object_or_404(UserProfile, user = request.user)
+        department_courses = f.Department_Courses.objects.get(department = user_profile.dept)
+        
+        related_courses = department_courses.courses.all()
+        print(related_courses)
+        for i in related_courses:
+            print(i.course)
 
-    tup = []
-    for unit in related_courses:
-        tup.append(unit.course)
-        tup = sorted(tup)
-    return render(request, "examination/test.html", {'tup':tup})
+        tup = []
+        for unit in related_courses:
+            tup.append(unit.course)
+            tup = sorted(tup)
+        return render(request, "examination/test.html", {'tup':tup})
+    else:
+        return render(request, "examination/test.html")
+
 
 def exam(request): 
     if request.method == "POST":
@@ -63,7 +67,10 @@ def exam(request):
 
 def result(request):
     if request.method == "POST":
+
         global objective_questions
+
+        # Update User Profile
         user_profile = get_object_or_404(UserProfile, user = request.user)
         qstn_number = int(request.POST['qstn_number'])
         time2 = int(time.time())- time1
@@ -84,6 +91,8 @@ def result(request):
         user_profile.total_marks += percentage
         user_profile.time_spent = time2 #In seconds
         user_profile.save()
+
+        # Update Students Trials
         
         context={
             "score": score,

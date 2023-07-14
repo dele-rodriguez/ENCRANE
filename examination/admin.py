@@ -12,3 +12,7 @@ class CommentTheoryAdmin(admin.ModelAdmin):
 @admin.register(CommentObjective)
 class CommentObjectiveAdmin(admin.ModelAdmin):
     list_display = ('username', 'date', 'question', 'content')
+
+@admin.register(StudentsTrials)
+class StudentsTrialsAdmin(admin.ModelAdmin):
+    list_display = ('username', 'course', 'score', 'date')

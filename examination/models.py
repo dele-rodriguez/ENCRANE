@@ -67,3 +67,12 @@ class CommentObjective(models.Model):
     def __str__(self):
 
         return self.username.username
+
+class StudentsTrials(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Faculty.Courses, on_delete=models.CASCADE)
+    score = models.PositiveBigIntegerField()
+    date = models.DateTimeField(default = datetime.now())
+
+    def __str__(self):
+        return self.username.username
