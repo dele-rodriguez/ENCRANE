@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'examination',
     'Faculties',
     'user_profiles',
+    'books'
 ]
 
 MIDDLEWARE = [
