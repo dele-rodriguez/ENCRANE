@@ -1,9 +1,19 @@
 tinymce.init({
 	selector: 'textarea',
-	plugins: 'image lists table',
+	plugins: 'image lists table autoresize',
 	toolbar: 'undo redo | link image  | numlist bullist | table',
+	autoresize_bottom_margin: 16,
+	setup: function(editor){
+		editor.on("change keyup setcontent", function(){
+			adjustEditorHeight(editor)
+			setAutomaticImageWidth(editor)
+		})
+	},
 	image_dimensions: false,
-  //   // image_max_width: 600,
+	image_uploadtab: true,
+
+
+    // image_max_width: 600,
   // image_advtab: False,
   //   /* enable title field in the Image dialog*/
   //   image_title: true,
@@ -54,4 +64,15 @@ tinymce.init({
 		input.click();
 	},
 	content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+	
 });
+
+function adjustEditorHeight(editor){
+	editor.getContentAreaContainer().style.height = "auto"
+	// editor.getContentAreaContainer().style.height = editor.getContentAreaContainer().scrollHeight() + "px"
+	
+}
+
+function setAutomaticImageWidth(editor){
+	editor.dom.loadCSS('img {max-width:120px; height:auto}')
+}

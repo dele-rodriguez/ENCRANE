@@ -139,9 +139,3 @@
     border-radius: 0px;
     display: block;
   }
-
-  @media(max-width: 700px){
-    .question img{
-      width: 80%;
-    }
-  }
