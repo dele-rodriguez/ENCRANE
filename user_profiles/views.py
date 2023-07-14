@@ -12,8 +12,8 @@ def register(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         profile_form = UserProfileForm(request.POST, request.FILES)
-        username =  request.POST["username"]
-        email =  request.POST["email"]
+        username =  (request.POST["username"]).lower()
+        email =  (request.POST["email"]).lower()
         password1 =  request.POST["password1"]
         password2=  request.POST["password2"]
 
@@ -86,4 +86,4 @@ def dashboard(request):
         }
         return render(request, "userblog/dashboard.html", context)
     else:
-        return redirect("/signin")
+        return redirect("/login")

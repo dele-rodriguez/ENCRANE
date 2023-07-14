@@ -34,6 +34,7 @@ def question(request, pk):
         comment = request.POST["text"]
 
         if not comment.strip():
+            print("Error")
             return redirect("/"+pk)
         question_id = PostQuestion.objects.get(id = pk)
         question_model = Comment.objects.create(username = request.user, question = question_id, content = comment)
