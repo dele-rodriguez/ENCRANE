@@ -14,6 +14,25 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/skins/ui/oxide/skin.min.css">
      <script src="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> 
      <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon"> 
+     <style>
+      textarea{
+        height: auto;
+        overflow-y: auto;
+      }
+      .question img{
+        max-width: 80%;
+        height: auto;
+      }
+    @media(max-width: 800px){
+      .question img{
+        width: 80%;
+        height: auto;
+      }
+      #make-post figure{
+        display: none;
+      }
+  }
+     </style>
 </head>
 <body>
       <!-- Header -->
@@ -28,7 +47,7 @@
         <figure><img src="/media/{{ request.user.userprofile.profile_pic }}" alt=""></figure>
         <form method="post">
           {% csrf_token %}
-          <textarea name="text" placeholder="Ask a Question" rows="20"></textarea>
+          <textarea name="text" placeholder="Ask a Question"  oninput="resize()"></textarea>
           <button id="submit">Post</button>
         </form>
       </section>
@@ -43,6 +62,32 @@
       </section>
 <!-- recent questions -->
       <section class="questions-container recent" >
+
+        <section class="unit-question">
+          <div class="poster-profile">
+            <figure>
+              <img src="/media/profile_picture/dummy.png" alt="{{ recent_post.username}}">
+            </figure>
+            <div class="poster-info-">
+              <h2>Mayowa</h2>
+              <time>20th of June 2022</time>
+            </div>
+          </div>
+          <div class="question">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum rerum soluta pariatur, 
+            \vero ipsa quos et repudiandae doloremque explicabo esse!
+            <p>
+              
+            <img src="/media/profile_picture/dummy.png" alt="">
+            </p>
+          </div>
+          <div class="number-of-comments">
+            7 comment(s)
+          </div>
+          <div class="view-comments">
+            <a href="/question/{{ recent_post.id }}">View Comments</a>
+          </div>
+        </section>
         {% for recent_post in recent_posts %}
         <section class="unit-question">
           <div class="poster-profile">
@@ -75,9 +120,15 @@
   {% include 'extensions/footer.html' %}
 
   <script src="{% static 'tinymce.js' %}"></script>
-  <script src="{% static 'reload-page.js' %}"></script>
+  <!-- <script src="{% static 'reload-page.js' %}"></script> -->
   <script>
     document.querySelector("#home-link").className = "current"
+
+    function resize(){
+      const txt = document.querySelector("textarea")
+      txt.style.height = "auto"
+      txt.style.height = `${txt.scrollHeight}px`
+    }
   </script>
 </body>
 </html

@@ -41,7 +41,7 @@
       </div>
       {% if user.is_authenticated %}
         <div class="comment-section">
-          <form id="postform">
+          <form method="post">
             {% csrf_token %}
             <label>Write a Comment</label>
             <textarea  name="text" placeholder="Contribute..."></textarea>
@@ -74,7 +74,7 @@
 
   {% include 'extensions/footer.html' %}
   <script src = "{% static 'tinymce.js' %}"></script>
-  <script src="{% static 'reload-page.js' %}"></script>
+  <!-- <script src="{% static 'reload-page.js' %}"></script> -->
     <script>
     const current_link = document.querySelector("#test-link")
     current_link.className = "current"

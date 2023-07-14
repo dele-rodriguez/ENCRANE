@@ -1,0 +1,173 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Books</title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <style>
+        .books-container{
+            margin-top: 100px;
+            margin-left: 120px;
+            margin-right: 120px;
+        }
+        .books-container .download-text h1, .books-container .contribute h1{
+            font-size: 25px;
+        }
+        table{
+            border: 1px solid crimson;
+            width: 100%;
+        }
+        table tr th{
+            font-weight: bolder;
+        }
+        table tr th, td{
+            font-size: large;
+            border: 1px solid crimson;
+            text-align: center;
+        }
+        .add-ebook-container{
+            position: fixed;
+            height: 90%;
+            width: 100%;
+            justify-content: center;
+            background-color: transparent;
+            color: crimson;
+            display: none;
+        }
+        .add-ebook-container .add-ebook{
+            width: 500px;
+            background-color: #ddd;
+            height: max-content;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            flex-direction: column;
+            border-radius: 12px;
+            box-shadow: 1px 1px 1px 1px rgba(0,0,0,.7);
+            padding-bottom: 12px;
+            padding-top: 12px;
+        }
+        .add-ebook-container .add-ebook form{
+            width: 80%;
+        }
+        .add-ebook-container .add-ebook form label{
+            font-size: large;
+            font-weight: bold;
+        }
+        .add-ebook-container .add-ebook form input[type='text']{
+            width: 100%;
+            height: 40px;
+            outline: none;
+            border: 3px solid crimson;
+            border-radius: 10px;
+            font-size: 20px;
+            padding: 3px;
+        }
+
+        button{
+            background-color: crimson;
+            border: none;
+            width: 120px;
+            color: white;
+            height: 30px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            cursor: pointer;
+        }
+        .add-ebook-container .add-ebook form button{
+            display: block;
+            margin: 0 auto;
+        }
+        .close-upload{
+            display: flex;
+            justify-content: end;
+            width: 85%;
+        }
+        .close-upload h1{
+            background-color: crimson;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    {% include 'extensions/header.html' %}
+
+    <div class="add-ebook-container">
+        <div class="add-ebook">
+            <div class="close-upload">
+                <h1 onclick="show_upload(false)">
+                    &cross;
+                </h1>
+            </div>
+            <h1>Upload PDF</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="book_title">Book Title:</label>
+                <br>
+                <input type="text" name="book_title" id="book_title">
+                <br><br>
+                <label for="add_file">Add PDF</label>
+                <br>
+                <input type="file" name="add_file" id="add_file" accept=".pdf, .doc, .docx, .ppt, .pptx">
+                <br><br>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="books-container">
+        <div class="download-text">
+            <h1>Get Free eBooks here...</h1>
+        </div>
+
+        <div class="contribute">
+            <h1>Or do you have an eBook to share?</h1>
+            <button onclick="show_upload(true)">Tap to Upload</button>
+        </div>
+        <br>
+        <div class="books-table">
+            <table>
+                <tr>
+                    <th>Added By</th>
+                    <th>Book Title</th>
+                    <th>Date Added</th>
+                    <th>Download</th>
+                </tr>
+                {% for book in books %}
+                <tr>
+                    <td style="text-transform: Capitalize;">{{ book.username }}</td>
+                    <td>{{ book.book_title }}</td>
+                    <td>{{ book.date_added }}</td>
+                    <td><a href="media/{{ book.file }}">Preview</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    {% include 'extensions/footer.html' %}
+    <script>
+        const current_link = document.querySelector("#ebooks-link")
+        current_link.className = "current"
+        const upload_page = document.querySelector(".add-ebook-container")
+        function show_upload(state){
+            if (state == true){
+                upload_page.style.display = "flex"
+            }else if (state == false){
+                upload_page.style.display = "none"
+            }
+        }
+      </script>
+</body>
+</html>
