@@ -63,31 +63,7 @@
 <!-- recent questions -->
       <section class="questions-container recent" >
 
-        <section class="unit-question">
-          <div class="poster-profile">
-            <figure>
-              <img src="/media/profile_picture/dummy.png" alt="{{ recent_post.username}}">
-            </figure>
-            <div class="poster-info-">
-              <h2>Mayowa</h2>
-              <time>20th of June 2022</time>
-            </div>
-          </div>
-          <div class="question">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum rerum soluta pariatur, 
-            \vero ipsa quos et repudiandae doloremque explicabo esse!
-            <p>
-              
-            <img src="/media/profile_picture/dummy.png" alt="">
-            </p>
-          </div>
-          <div class="number-of-comments">
-            7 comment(s)
-          </div>
-          <div class="view-comments">
-            <a href="/question/{{ recent_post.id }}">View Comments</a>
-          </div>
-        </section>
+        
         {% for recent_post in recent_posts %}
         <section class="unit-question">
           <div class="poster-profile">

@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Exams</title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/myexams.css' %}">
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/myexams.css' %}">
+    <style>
+        img{
+            display: block;
+            width: 80%;
+            height: auto;
+        }
+        form{
+            display: inline-block
+        }
+        button{
+            font-size: 20px;
+            color: #000;
+            margin-right: 45px;
+            border: none;
+            background-color: transparent;
+
+        }
+        button:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'extensions/header.html' %}
+
+    <section id="_">
+        <section id="container">
+
+            {% include "extensions/hostedexam/sidenav.html" %}
+
+            <main>
+                <h1 style="text-transform: capitalize">{{ exam.title }}</h1>
+
+                <section id="questions">
+
+                    {% if empty == False %}
+                            <h2><a href="/hostexam/add/{{ exam.id }}">Click here to add Questions</a></h2>
+                        {% for question in questions %}
+                            <section class="unit-question">
+                                <h1>{{ question.question | safe }}</h1>
+                                <section class="links">
+                                
+                                    <form method = "post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="del_question" value="{{ question.id }}">
+                                        <button>Delete</button>
+                                    </form>
+                                    <a href="/hostexam/edit/{{ question.id }}">Edit</a>
+                                </section>
+                            </section>
+                        {% endfor %}
+                    {% else %}
+                            <h1>You've not added any Question.</h1>
+                            <h2><a href="/hostexam/add/{{ exam.id }}">Click here to add Questions</a></h2>
+                    {% endif %}
+
+                </section>
+            </main>
+        </section>
+
+    </section>
+    {% include 'extensions/footer.html' %}
+
+    <script src="{% static 'js/host exam/delqstn.js' %}"></script>
+   </body>
+</html>

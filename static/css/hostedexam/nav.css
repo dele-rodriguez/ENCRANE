@@ -1,0 +1,31 @@
+section#_{
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#container{
+    display: flex;
+    flex-direction: row; 
+}
+#container #sidenav{
+    width: 20%;
+    border-right: 1px solid crimson;
+    /* position: fixed; */
+
+}
+#container #sidenav nav ul li{
+    list-style: none;
+    font-size: x-large;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+#container #sidenav nav ul li a{
+
+    color: crimson;
+}
+
+        /* Media Query */
+
+
+        /* Media Query Ends */

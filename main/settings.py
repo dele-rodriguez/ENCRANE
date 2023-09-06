@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'examination',
     'Faculties',
     'user_profiles',
-    'books'
+    'books',
+    'HostedExam'
 ]
 
 MIDDLEWARE = [
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'africa/lagos'
 
 USE_I18N = True
 

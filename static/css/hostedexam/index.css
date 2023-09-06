@@ -1,0 +1,72 @@
+main{
+    display: flex;
+    width: 70%;
+    justify-content: center;
+}
+main *{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#create-box{
+    color: crimson;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 70vh;
+    min-height: 100vh;
+    height: max-content;
+}
+#create-box h1{
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+textarea{
+    outline: none;
+    padding: 5px;
+    font-size: large;
+    border: 2px solid crimson;
+    height: 180px;
+    width: 100%;
+    resize: none;
+    border-radius: 7px;
+}
+
+form{
+    display: flex;
+    width: 450px;
+    flex-direction: column;
+}
+label{
+    font-weight: bold;
+    font-size: large;
+}
+label,form input[type="text"]{
+    width: 98%;
+}
+input[type="text"], input[type="number"]{
+    height: 35px;
+    outline: none;
+    padding: 5px;
+    font-size: large;
+    border: 2px solid crimson;
+    border-radius: 5px;
+}
+#time-info{
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+#time-info input{
+    width: 85%;
+    height: 35px;
+    font-size: large;
+    border: 2px solid crimson;
+    border-radius: 5px;
+}
+button{
+    background-color: crimson;
+    height: 40px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}

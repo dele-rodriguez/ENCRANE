@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Exam</title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/index.css' %}">
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+</head>
+<body>
+
+    {% include 'extensions/header.html' %}
+
+    <section id="_">
+        <section id="container">
+
+            {% include "extensions/hostedexam/sidenav.html" %}
+
+            <main>
+                <section>
+                    <section id="create-box">
+                        <h1>Create New Exam</h1>
+
+                        {% for message in messages %}
+                            <h2>{{message}}</h2>
+                        {% endfor %}
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <label>Name of exam: <br>
+                                <input type="text" name="exam_name" required>
+                            </label>
+                            <section id="time-info">
+                                <label>Exam Starts: <br>
+                                    <input type="datetime-local" name="exam_st" id="exam_st" required>
+                                </label><br>
+                                <label>Exam Ends: <br>
+                                    <input type="datetime-local" name = "exam_end" id="exam_end" required>
+                                </label><br>
+                            </section>
+                
+                            <section>
+                                <label>Duration in Minutes:
+                                    <input type="number" name = "duration" id="duration" required min="0">
+                                </label>
+                            </section><br>
+                            <label>Description (optional): <br>
+                                <textarea name="description" cols="30" rows="10"></textarea>
+                            </label>
+                
+                            <button>Create exam</button>
+                        </form>
+                    </section>
+                </section>
+            </main>
+        </section>
+
+    </section>
+    {% include 'extensions/footer.html' %}
+    <script src="{% static 'js/host exam/monitor-datetime.js' %}"></script>
+</body>
+</html>

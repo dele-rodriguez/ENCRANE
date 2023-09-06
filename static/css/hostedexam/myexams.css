@@ -1,0 +1,24 @@
+main{
+    margin-left: 25px;
+}
+main h1{
+    color: crimson;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+main section h1{
+    font-size: 25px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+main section section{
+    margin-bottom: 20px;
+}
+main section a{
+    font-size: 20px ;
+    color: #000;
+    padding-right: 45px;
+}
+main section a:hover{
+    text-decoration: underline;
+}

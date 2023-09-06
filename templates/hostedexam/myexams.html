@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Exams</title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/myexams.css' %}">
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+</head>
+<body>
+
+    {% include 'extensions/header.html' %}
+
+    <section id="_">
+        <section id="container">
+
+            {% include "extensions/hostedexam/sidenav.html" %}
+
+            <main>
+                <h1>My Exams</h1>
+                <section>
+                    {% for exam in exams %}
+                    <section>
+                            <h1>
+                                {{ exam.title }}
+                            </h1>
+                            <a href="/hostexam/questions/{{ exam.id }}">
+                                <span>
+                                    Questions
+                                </span>
+                            </a>
+                            <a href="/hostexam/progress/{{ exam.id }}">
+                                <span>
+                                    Students Progress 
+                                </span>
+                            </a>
+                    </section>
+                    {% endfor %}
+        </section>
+            </main>
+        </section>
+
+    </section>
+    {% include 'extensions/footer.html' %}
+    <script src="{% static 'js/host exam/monitor-datetime.js' %}"></script>
+</body>
+</html>

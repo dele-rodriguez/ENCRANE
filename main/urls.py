@@ -25,7 +25,8 @@ urlpatterns = [
     # path("", include("chat.urls")),
     path("tinymce/", include("tinymce.urls")),
     path("",include("user_profiles.urls")),
-    path("", include("books.urls"))
+    path("", include("books.urls")),
+    path("hostexam/", include("HostedExam.urls"))
     
 ]
 

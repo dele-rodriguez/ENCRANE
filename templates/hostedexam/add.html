@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ exam.title }}</title>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/myexams.css' %}">
+    <link rel="shortcut icon" href="{% static 'register-img.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/hostedexam/myexams.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/skins/ui/oxide/skin.min.css">
+    <script src="https://cdn.tiny.cloud/1/djmdy4o85uemgvts9t5m6s3q0fto4f416htuiweq3m5j5v8u/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> 
+
+    <script src="{% static 'tinymce.js' %}"></script>
+    <style>
+        img{
+            display: block;
+            width: 80%;
+            height: auto;
+        }
+        form{
+            color: #000;
+            width: 100%;
+        }
+        textarea{
+            width: 100%;
+            height: 100px;
+            resize:none;
+        }
+        label{
+            font-size: large;;
+        }
+        button{
+            font-size: 20px;
+            width: 270px;
+            padding: 3px;
+            border: none;
+            background-color: crimson;
+            color: #fff;
+        }
+        button:hover{
+            background-color: #fff;
+            color: crimson;
+            border: 1px solid crimson
+            ;
+            cursor: pointer;
+        }
+        main{
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'extensions/header.html' %}
+
+    <section id="_">
+        <section id="container">
+
+            {% include "extensions/hostedexam/sidenav.html" %}
+
+            <main>
+                <h1 style="text-transform: capitalize">{{ exam.title }}</h1>
+
+                <section id="questions">
+
+
+                            <h1>Add new Question</h1>
+                            <h2><a href="/hostexam/questions/{{ exam.id }}">Click here to view your Questions</a></h2>
+                            <br>
+                            <form method="post" id="add">
+                                {% csrf_token %}
+                                <label>
+                                    Question: <br>
+                                    <textarea name="qstn" ></textarea>
+                                </label><br>
+                                <label>
+                                    Option A: <br>
+                                    <textarea name="op1" ></textarea>
+                                </label><br>
+                                <label>
+                                   Option B: <br>
+                                    <textarea name="op2" ></textarea>
+                                </label><br>
+                                <label>
+                                    Option C: <br>
+                                    <textarea name="op3" ></textarea>
+                                </label><br>
+                                <label>
+                                   Option D: <br>
+                                    <textarea name="op4" ></textarea>
+                                </label><br>
+                                <label>Answer:
+                                    <select name="answer" >
+                                        <option value="a">Option A</option>
+                                        <option value="b">Option B</option>
+                                        <option value="c">Option C</option>
+                                        <option value="d">Option D</option>
+                                    </select>
+                                </label><br><br>
+                                <button>Add Question</button>
+                            </form>
+
+                </section>
+            </main>
+        </section>
+
+    </section>
+    {% include 'extensions/footer.html' %}
+
+   </body>
+</html>
